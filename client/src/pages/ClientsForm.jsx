@@ -40,7 +40,7 @@ function ClientsForm() {
         initialValues={client}
         enableReinitialize={true}
         onSubmit={async (values, actions) => {
-          // Verificar si algún campo está vacío
+          // si algún campo está vacío
           if (
             !values.name ||
             !values.last_name ||

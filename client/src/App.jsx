@@ -28,7 +28,6 @@ function App() {
       try {
         const { exp } = JSON.parse(atob(token.split(".")[1]));
         setIsAuthenticated(true);
-        console.log(isAuthenticated, "2");
         if (Date.now() >= exp * 1000) {
           // Si el token ha expirado, redirige a la página de inicio de sesión
           navigate("/login");

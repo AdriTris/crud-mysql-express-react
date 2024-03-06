@@ -2,10 +2,14 @@ import { useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik"; //biblioteca de react para validar inputs, entradas de usuario
 import { getLogin } from "../api/login.api";
 import { useLogin } from "../context/UserProvider";
+import toast, { Toaster } from "react-hot-toast";
 
 function Login() {
   const { login } = useLogin();
   const navigate = useNavigate();
+  const notifyAllFields = () => toast.error("All fields required");
+  const notifyInvalidCredentianls = () =>
+    toast.error("Incorrect Email or Password");
 
   return (
     <div>
@@ -13,18 +17,19 @@ function Login() {
       <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={async (values, actions) => {
-          //   if (!values.name || !values.last_name) {
-          //     console.log("All fields are required");
-          //     return; // Detener el envío del formulario
-          //   }
+          if (!values.email || !values.password) {
+            notifyAllFields();
+            return; // Detener el envío del formulario
+          }
+
           try {
             const response = await getLogin(values.email, values.password);
             const userData = response.data;
             const token = response.data.token;
 
-            console.log(userData, token); // Verifica qué datos devuelve el servidor
+            console.log(userData); // Verifica qué datos devuelve el servidor
             if (response.status === 200 && token) {
-              console.log("Login successful!!!!!!");
+              console.log("Login successful!");
               navigate("/clients");
               localStorage.setItem("token", token);
               login();
@@ -35,7 +40,7 @@ function Login() {
             console.error("Error during login:", error);
             // Muestra un mensaje de error o realiza alguna otra acción
           }
-          actions.setSubmitting(false); // Importante: marca el formulario como no enviado
+          actions.setSubmitting(false); //marca el formulario como no enviado
         }}
       >
         {({ handleChange, handleSubmit, values }) => (
@@ -72,6 +77,7 @@ function Login() {
           </Form>
         )}
       </Formik>
+      <Toaster />
     </div>
   );
 }

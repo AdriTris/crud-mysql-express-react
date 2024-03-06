@@ -23,7 +23,7 @@ export const getClient = async (req, res) => {
 
     //si no encuentra nada
     if (result.length === 0)
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "Client not found" });
 
     res.json(result[0]);
   } catch (error) {
@@ -73,7 +73,7 @@ export const deleteClient = async (req, res) => {
     if (result.affectedRows === 0)
       return res.status(404).json({ message: "User not found" });
 
-    return res.sendStatus(204); //devuelve el status pero no devuelve ninguna informacion
+    return res.sendStatus(204); //devuelve el status No content pero no devuelve ninguna informacion
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

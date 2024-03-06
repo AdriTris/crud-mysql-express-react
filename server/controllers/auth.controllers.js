@@ -5,26 +5,6 @@ import { pool } from "../db.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-// Función para verificar si un token es válido
-// const verifyToken = (token) => {
-//   try {
-//     const decodedToken = jwt.verify(token, "tu_secreto_secreto");
-//     return decodedToken;
-//   } catch (error) {
-//     return null; // Si el token no es válido, devuelve null
-//   }
-// };
-
-// // Función para decodificar un token JWT (sin verificar si es válido)
-// const decodeToken = (token) => {
-//   try {
-//     const decodedToken = jwt.decode(token);
-//     return decodedToken;
-//   } catch (error) {
-//     return null; // Si hay un error al decodificar el token, devuelve null
-//   }
-// };
-
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;

@@ -19,14 +19,14 @@ function ClientsPage() {
   }
 
   return (
-    <div>
+    <div className="mx-6">
       <div className="flex justify-between items-center">
         <h1 className=" text-4xl font-bold text-center">Clients</h1>
         <button className=" px-3 py-1 bg-violet-500 rounded-lg ">
           <Link to="/new">Create Client</Link>
         </button>
       </div>
-      <div className="grid grid-cols-3 gap-5 mt-3">{renderMain()}</div>
+      <div className="grid grid-cols-3 gap-5 mt-3 ">{renderMain()}</div>
     </div>
   );
 }
